@@ -1,11 +1,12 @@
 
 # ListJavaVersions
 
-This PowerShell script, `ListJavaVersions.ps1`, lists all the Java versions installed on a Windows system.
+This PowerShell script, `ListJavaVersions.ps1`, lists all the Java versions installed on a Windows system, including those identified via the registry.
 
 ## Functionality
 
-- The script searches common installation paths for Java and lists each found version along with its installation path.
+- The script searches common installation paths and the Windows registry for Java.
+- It lists each found Java version along with its installation path.
 
 ## Usage
 
@@ -22,4 +23,5 @@ To run the script, execute it in PowerShell:
 
 ## Note
 
-- This script assumes that Java is installed in its default location (either in `Program Files` or `Program Files (x86)`).
+- The script checks both file system locations and registry entries for Java installations.
+- Administrative privileges might be required to access certain registry locations.
