@@ -1,11 +1,12 @@
 
-# PowerShell Script to List All Installed Java Versions, Including Registry Entries
+# PowerShell Script to List All Installed Java Versions, Including Registry Entries and User Locations
 
 function Get-JavaVersions {
     # Paths to check for Java installations
     $javaPaths = @(
         "C:\Program Files\Java\*",
-        "C:\Program Files (x86)\Java\*"
+        "C:\Program Files (x86)\Java\*",
+        "$env:LOCALAPPDATA\Programs\Java\*"
     )
 
     # Gathering Java installations from file system
@@ -23,7 +24,9 @@ function Get-JavaVersions {
     try {
         $javaRegPaths = @(
             "HKLM:\SOFTWARE\JavaSoft\Java Runtime Environment",
-            "HKLM:\SOFTWARE\WOW6432Node\JavaSoft\Java Runtime Environment"
+            "HKLM:\SOFTWARE\WOW6432Node\JavaSoft\Java Runtime Environment",
+            "HKCU:\SOFTWARE\JavaSoft\Java Runtime Environment",
+            "HKCU:\SOFTWARE\WOW6432Node\JavaSoft\Java Runtime Environment"
         )
 
         foreach ($regPath in $javaRegPaths) {

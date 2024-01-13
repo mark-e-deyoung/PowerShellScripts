@@ -20,7 +20,7 @@ Get-ExecutionPolicy
 
 To run scripts, you might need to change the execution policy. The recommended policy to run this script is `RemoteSigned`. This policy allows running downloaded scripts that are signed by a trusted publisher.
 
-Since the provided script is not signed, you will need to adjust the execution policy to allow unsigned scripts. The recommended required policy for this purpose is `Unrestricted`. However, please be aware that this setting lowers the security and should be used cautiously.
+Since the scripts provided in the repository are not signed, you will need to adjust the execution policy to allow unsigned scripts. The required policy for this purpose is `Unrestricted`. However, please be aware that this setting lowers the security and should be used cautiously.
 
 ### Using PowerShell as an Administrator
 
