@@ -2,9 +2,20 @@
 # PowerShell Script to List All Installed Steam Games with Disk Space Usage
 
 function Get-SteamGames {
-    $steamPath = "$env:ProgramFiles(x86)\Steam\steamapps\common"
-    if (Test-Path $steamPath) {
-        $games = Get-ChildItem -Path $steamPath -Directory
+    # Finding the Steam installation path from the registry
+    try {
+        $steamPathReg = Get-ItemProperty "HKCU:\Software\Valve\Steam"
+        $steamPath = $steamPathReg.SteamPath
+    } catch {
+        Write-Host "Unable to find Steam installation in the registry."
+        return
+    }
+
+    # Constructing the path to the 'steamapps' directory
+    $steamAppsPath = Join-Path -Path $steamPath -ChildPath "steamapps\common"
+
+    if (Test-Path $steamAppsPath) {
+        $games = Get-ChildItem -Path $steamAppsPath -Directory
 
         foreach ($game in $games) {
             $gamePath = $game.FullName
@@ -18,7 +29,7 @@ function Get-SteamGames {
             }
         }
     } else {
-        Write-Host "Steam installation not found at the expected location."
+        Write-Host "Steam games directory not found at the expected location."
     }
 }
 
